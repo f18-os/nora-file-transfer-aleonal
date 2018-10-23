@@ -59,7 +59,7 @@ class ServerThread(Thread):
                 else:
                     #addcode here
                     print("File already exists in server!")
-                    framedSend(sock, b"sdsf", 1)
+                    self.fsock.sendmsg(sock, b"sdsf", 1)
 
             elif "get" in data[0]:
                 print("File request received.")
@@ -68,7 +68,7 @@ class ServerThread(Thread):
                     f = open(data[1], "rb")
                 except FileNotFoundError:
                     print("File not found.")
-                    framedSend(sock, b"sdsf", 1)
+                    self.fsock.sendmsg(sock, b"sdsf", 1)
                     continue
 
                 if os.stat(data[1]).st_size == 0:
@@ -77,7 +77,7 @@ class ServerThread(Thread):
                     print("Error, file is empty.")
                     continue
 
-                framedSend(sock, f.read(), -1)
+                    self.fsock.sendmsg(sock, f.read(), -1)
                 f.close()
                 print("File sent.")
 

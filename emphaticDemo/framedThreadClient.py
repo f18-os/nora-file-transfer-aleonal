@@ -32,7 +32,7 @@ except:
 
 class ClientThread(Thread):
     def __init__(self, serverHost, serverPort, debug):
-        Thread.__init__(self, daemon=False)
+        Thread.__init__(self, daemon=None)
         self.serverHost, self.serverPort, self.debug = serverHost, serverPort, debug
         self.start()
     def run(self):
@@ -72,4 +72,3 @@ class ClientThread(Thread):
 
 for i in range(100):
     ClientThread(serverHost, serverPort, debug)
-
